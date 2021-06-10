@@ -4,24 +4,24 @@ import { useSelector } from "react-redux";
 import { getUIProperty } from "../redux/slices/uiSlice";
 import { getApiResource } from "../redux/slices/apiSlice";
 
-const calculateTotalPrice = (duration, storage, prices) => {
+const calculateTotalPrice = (duration = 12, storage = 5, prices) => {
   if (prices && prices.subscription_plans) {
     const plan = prices.subscription_plans.find(
       (plan) => plan.duration_months === duration
     );
-
-    console.log(prices.subscription_plans);
-    const costPerGB = plan.price_usd_per_gb;
-
-    return storage * costPerGB;
+    if (plan) {
+      const costPerGB = plan.price_usd_per_gb;
+      return storage * costPerGB;
+    }
   }
 
   return 0;
 };
 
 const TotalPrice = () => {
-  const duration = useSelector((state) => getUIProperty(state, "duration"));
-  const storage = useSelector((state) => getUIProperty(state, "storage"));
+  const duration =
+    useSelector((state) => getUIProperty(state, "duration")) || 12;
+  const storage = useSelector((state) => getUIProperty(state, "storage")) || 5;
   const discount = useSelector((state) => getUIProperty(state, "discount"));
 
   // Prices from api

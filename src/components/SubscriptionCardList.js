@@ -10,10 +10,6 @@ const SubscriptionCardList = ({ cards, valueName }) => {
     useSelector((state) => getUIProperty(state, valueName)) ||
     cards.defaultValue;
 
-  useEffect(() => {
-    dispatch(setUIProperty({ name: valueName, value: cards.defaultValue }));
-  }, []);
-
   return (
     <div style={{ marginBottom: "3%" }}>
       <Typography style={{ marginBottom: "1%" }} variant="h5" align="center">
