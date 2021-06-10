@@ -29,7 +29,7 @@ const TotalPrice = () => {
 
   return (
     <div style={{ width: "100%", position: "sticky" }}>
-      <Grid container justify="center" direction="column">
+      <Grid container justify="center" alignItems="center" direction="column">
         <Grid container item xs={6}>
           <Grid item xs={6}>
             <Typography variant="h5">Total price: </Typography>

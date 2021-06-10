@@ -3,10 +3,13 @@ import React from "react";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getUIProperty, setUIProperty } from "../redux/slices/uiSlice";
+import { getUIProperty, setUIData } from "../redux/slices/uiSlice";
 
 const ValidationTextField = withStyles({
   root: {
+    "& > *": {
+      margin: "16px",
+    },
     "& input:valid + fieldset": {
       borderColor: "green",
       borderWidth: 2,
@@ -39,6 +42,15 @@ const CreditCard = () => {
   const creditCardData =
     useSelector((state) => getUIProperty(state, "creditCardData")) || {};
 
+  const handleInputFocus = (e) => {
+    dispatch(
+      setUIData({
+        name: "creditCardData",
+        value: { focus: e.target.name },
+      })
+    );
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let formatedValue = value;
@@ -49,7 +61,7 @@ const CreditCard = () => {
     }
 
     dispatch(
-      setUIProperty({
+      setUIData({
         name: "creditCardData",
         value: { [name]: formatedValue },
       })
@@ -59,6 +71,7 @@ const CreditCard = () => {
   return (
     <div id="PaymentForm">
       <Cards
+        focused={creditCardData.focus || ""}
         cvc={creditCardData.cvc || ""}
         expiry={creditCardData.expiry || ""}
         name={creditCardData.name || ""}
@@ -75,6 +88,7 @@ const CreditCard = () => {
             required
             variant="outlined"
             onChange={handleInputChange}
+            onFocus={handleInputFocus}
             inputmode="numeric"
             pattern="[0-9\s]{13,19}"
             autoComplete="cc-number"
@@ -88,6 +102,7 @@ const CreditCard = () => {
             required
             variant="outlined"
             onChange={handleInputChange}
+            onFocus={handleInputFocus}
             placeholder="Name"
           />
         </FormControl>
@@ -101,6 +116,7 @@ const CreditCard = () => {
             required
             variant="outlined"
             onChange={handleInputChange}
+            onFocus={handleInputFocus}
             inputmode="numeric"
             placeholder="xxx"
           />
@@ -113,6 +129,7 @@ const CreditCard = () => {
             required
             variant="outlined"
             onChange={handleInputChange}
+            onFocus={handleInputFocus}
             inputmode="numeric"
             placeholder="xx/xx"
           />
