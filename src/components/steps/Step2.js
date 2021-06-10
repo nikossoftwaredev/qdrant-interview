@@ -1,7 +1,12 @@
 import React from "react";
+import CreditCard from "../CreditCard";
 
 const Step2 = () => {
-  return <div>Step 2</div>;
+  return (
+    <div>
+      <CreditCard />
+    </div>
+  );
 };
 
 export default Step2;

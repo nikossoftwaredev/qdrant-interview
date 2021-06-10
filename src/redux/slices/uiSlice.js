@@ -9,7 +9,7 @@ const uiSlice = createSlice({
     setUIProperty(state, action) {
       const { name } = action.payload;
       const { value } = action.payload;
-      state[name] = value;
+      state[name] = { ...state[name], ...value };
     },
   },
 });
