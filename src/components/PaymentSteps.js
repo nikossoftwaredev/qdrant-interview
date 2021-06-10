@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
+import { useSelector } from "react-redux";
+import { getUIProperty } from "../redux/slices/uiSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +40,9 @@ const steps = [
 ];
 
 const PaymentSteps = () => {
+  const isCreditCardValid =
+    useSelector((state) => getUIProperty(state, "creditCardValid")) || false;
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -109,6 +114,7 @@ const PaymentSteps = () => {
               <Button
                 variant="contained"
                 color="primary"
+                disabled={!isCreditCardValid && activeStep === 1}
                 onClick={handleNext}
                 className={classes.button}
               >

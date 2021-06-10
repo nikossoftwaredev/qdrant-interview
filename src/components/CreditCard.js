@@ -1,9 +1,13 @@
 import { FormControl, TextField, withStyles } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getUIProperty, setUIData } from "../redux/slices/uiSlice";
+import {
+  getUIProperty,
+  setUIData,
+  setUIProperty,
+} from "../redux/slices/uiSlice";
 
 const ValidationTextField = withStyles({
   root: {
@@ -41,6 +45,29 @@ const CreditCard = () => {
   const dispatch = useDispatch();
   const creditCardData =
     useSelector((state) => getUIProperty(state, "creditCardData")) || {};
+
+  useEffect(() => {
+    if (
+      creditCardData.number?.length === 19 &&
+      creditCardData.cvc?.length === 3 &&
+      creditCardData.expiry?.length === 5 &&
+      creditCardData.name
+    )
+      dispatch(
+        setUIProperty({
+          name: "creditCardValid",
+          value: true,
+        })
+      );
+    else {
+      dispatch(
+        setUIProperty({
+          name: "creditCardValid",
+          value: false,
+        })
+      );
+    }
+  }, [creditCardData, dispatch]);
 
   const handleInputFocus = (e) => {
     dispatch(

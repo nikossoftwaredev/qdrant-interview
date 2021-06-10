@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Checkbox, Tooltip, Typography } from "@material-ui/core";
 import HelpIcon from "@material-ui/icons/Help";
 import { Space } from "../styles/genericStyles";
@@ -15,7 +15,6 @@ const UpfrontPayment = () => {
     dispatch(setUIProperty({ name: "discount", value: event.target.checked }));
   };
 
-  console.log(checked);
   return (
     <Space>
       <Typography variant="h5">Upfront payment:</Typography>
