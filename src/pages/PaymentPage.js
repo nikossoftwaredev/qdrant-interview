@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import PaymentSteps from "../components/PaymentSteps";
+import TotalPrice from "../components/TotalPrice";
 import { apiGET } from "../redux/slices/apiSlice";
 
 const PaymentPage = () => {
@@ -17,6 +18,7 @@ const PaymentPage = () => {
 
   return (
     <div>
+      <TotalPrice />
       <PaymentSteps />
     </div>
   );

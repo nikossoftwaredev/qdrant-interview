@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Interview for QDrant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Implement a subscription order process for a cloud storage provider using React.
+
+Description
+The subscription order process has 3 steps:
+
+1. Select subscription parameters:
+   Duration: 3/6/12 Months (default: 12)
+   Amount of gigabytes in a cloud: 5/10/50 (default: 5)
+   Upfront payment: yes/no (default: no)
+2. Payment data:
+   Credit card number
+   Credit card expiration date
+   Credit card security code
+3. Confirmation
+   Summary of the selected subscription including total price and price per GB.
+   Email of the user
+   Terms and conditions agreement checkbox
+   Confirmation button
+
+Requirements
+If the user selects upfront payment, the total price should be reduced by 10%
+Current selected subscription and final price should be shown on every step
+Subscription prices should be retrieved from https://cloud-storage-prices-moberries.herokuapp.com/prices
+All parameters should be required
+It should be possible to change steps by clicking on the Next or Back button.
+Every step needs to be completed in order to see the next one.
+Confirm button click handler should send data to the API endpoint https://httpbin.org/post
+
+General
+You can use Bootstrap or any other UI Library of your choice for styling. You are also allowed to use any npm packages that you see fit - no need to make everything from scratch.
+TypeScript is more than welcome!
 
 ## Available Scripts
 
 In the project directory, you can run:
 
+### `npm install`
+
+For installing all the npms
+
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

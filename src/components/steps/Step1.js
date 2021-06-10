@@ -1,5 +1,4 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
 import SubscriptionCardList from "../SubscriptionCardList";
 import UpfrontPayment from "../UpfrontPayment";
 
@@ -19,9 +18,8 @@ const gigabyte = {
 const Step1 = () => {
   return (
     <div>
-      <Typography>Select subscription parameters</Typography>
-      <SubscriptionCardList cards={duration} />
-      <SubscriptionCardList cards={gigabyte} />
+      <SubscriptionCardList cards={duration} valueName="duration" />
+      <SubscriptionCardList cards={gigabyte} valueName="storage" />
       <UpfrontPayment />
     </div>
   );
