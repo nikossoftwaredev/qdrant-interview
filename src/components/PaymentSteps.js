@@ -117,7 +117,7 @@ const PaymentSteps = () => {
                   onClick={handleNext}
                   className={classes.button}
                 >
-                  "Next"
+                  Next
                 </Button>
               )}
             </div>

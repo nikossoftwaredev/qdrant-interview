@@ -90,7 +90,7 @@ const CreditCard = () => {
     dispatch(
       setUIData({
         name: "creditCardData",
-        value: { [name]: formatedValue },
+        value: { [name]: formatedValue || "" },
       })
     );
   };
@@ -116,7 +116,7 @@ const CreditCard = () => {
             variant="outlined"
             onChange={handleInputChange}
             onFocus={handleInputFocus}
-            inputmode="numeric"
+            inputMode="numeric"
             pattern="[0-9\s]{13,19}"
             autoComplete="cc-number"
             placeholder="xxxx xxxx xxxx xxxx"
@@ -144,7 +144,7 @@ const CreditCard = () => {
             variant="outlined"
             onChange={handleInputChange}
             onFocus={handleInputFocus}
-            inputmode="numeric"
+            inputMode="numeric"
             placeholder="xxx"
           />
           <ValidationTextField
@@ -157,7 +157,7 @@ const CreditCard = () => {
             variant="outlined"
             onChange={handleInputChange}
             onFocus={handleInputFocus}
-            inputmode="numeric"
+            inputMode="numeric"
             placeholder="xx/xx"
           />
         </FormControl>
