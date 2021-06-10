@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import PaymentSteps from "../components/PaymentSteps";
 import TotalPrice from "../components/TotalPrice";
 import { apiGET } from "../redux/slices/apiSlice";
+import { BodyWithPadding } from "../styles/genericStyles";
 
 const PaymentPage = () => {
   const dispatch = useDispatch();
@@ -17,10 +18,10 @@ const PaymentPage = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <BodyWithPadding padding="1% 5% 1% 5%">
       <TotalPrice />
       <PaymentSteps />
-    </div>
+    </BodyWithPadding>
   );
 };
 

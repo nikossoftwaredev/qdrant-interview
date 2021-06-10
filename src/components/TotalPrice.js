@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@material-ui/core";
-import React from "react";
-import { useSelector } from "react-redux";
-import { getUIProperty } from "../redux/slices/uiSlice";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUIProperty, setUIData } from "../redux/slices/uiSlice";
 import { getApiResource } from "../redux/slices/apiSlice";
 
 const calculateTotalPrice = (duration = 12, storage = 5, prices) => {
@@ -19,13 +19,26 @@ const calculateTotalPrice = (duration = 12, storage = 5, prices) => {
 };
 
 const TotalPrice = () => {
+  const dispatch = useDispatch();
   const duration =
     useSelector((state) => getUIProperty(state, "duration")) || 12;
   const storage = useSelector((state) => getUIProperty(state, "storage")) || 5;
   const discount = useSelector((state) => getUIProperty(state, "discount"));
+  const summaryData = useSelector(
+    (state) => getUIProperty(state, "summaryData") || {}
+  );
 
   // Prices from api
   const prices = useSelector((state) => getApiResource(state, "prices"));
+
+  useEffect(() => {
+    dispatch(
+      setUIData({
+        name: "summaryData",
+        value: { totalPrice: calculateTotalPrice(duration, storage, prices) },
+      })
+    );
+  }, [duration, storage, prices, dispatch]);
 
   return (
     <div style={{ width: "100%", position: "sticky" }}>
@@ -42,14 +55,14 @@ const TotalPrice = () => {
             >
               {discount ? (
                 <>
-                  <del style={{ color: "red" }}>
-                    {`${calculateTotalPrice(duration, storage, prices)} $`}
-                  </del>
+                  <del
+                    style={{ color: "red" }}
+                  >{`${summaryData?.totalPrice} $`}</del>
                   &nbsp;
-                  {` ${calculateTotalPrice(duration, storage, prices) * 0.9} $`}
+                  {` ${summaryData?.totalPrice * 0.9} $`}
                 </>
               ) : (
-                <>{`${calculateTotalPrice(duration, storage, prices)} $`}</>
+                <>{`${summaryData?.totalPrice} $`}</>
               )}
             </Typography>
           </Grid>

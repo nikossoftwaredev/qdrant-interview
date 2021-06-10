@@ -99,9 +99,7 @@ const PaymentSteps = () => {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>
-              {steps[activeStep].component}
-            </Typography>
+            {steps[activeStep].component}
             <div>
               <Button
                 disabled={activeStep === 0}
@@ -111,15 +109,17 @@ const PaymentSteps = () => {
                 Back
               </Button>
 
-              <Button
-                variant="contained"
-                color="primary"
-                disabled={!isCreditCardValid && activeStep === 1}
-                onClick={handleNext}
-                className={classes.button}
-              >
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button>
+              {activeStep !== steps.length - 1 && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={!isCreditCardValid && activeStep === 1}
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  "Next"
+                </Button>
+              )}
             </div>
           </div>
         )}
