@@ -21,5 +21,6 @@ const uiSlice = createSlice({
 
 export const { setUIProperty, setUIData } = uiSlice.actions;
 export const getUIProperty = (state, name) => state.ui[name];
+export const getUIData = (state, name) => state.ui[name] || {};
 
 export default uiSlice.reducer;

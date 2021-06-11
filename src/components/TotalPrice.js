@@ -1,7 +1,8 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getUIData,
   getUIProperty,
   setUIData,
   setUIProperty,
@@ -31,9 +32,8 @@ const TotalPrice = () => {
   const storage = useSelector((state) => getUIProperty(state, "storage"));
   const discount = useSelector((state) => getUIProperty(state, "discount"));
   const duration = useSelector((state) => getUIProperty(state, "duration"));
-  const summaryData = useSelector(
-    (state) => getUIProperty(state, "summaryData") || {}
-  );
+
+  const summaryData = useSelector((state) => getUIData(state, "summaryData"));
 
   useEffect(() => {
     // Set the default Values
@@ -59,8 +59,18 @@ const TotalPrice = () => {
         alignItems: "center",
       }}
     >
-      <div class="receipt">
-        <div class="receipt-list">
+      <div className="receipt">
+        <div className="receipt-list">
+          <Typography variant="h6">Selected Subsciption: </Typography>
+
+          <Typography
+            style={{ marginBottom: "1%", color: colors.hover }}
+            variant="h5"
+            align="center"
+          >
+            {`${duration} Months ${storage} GB`}
+          </Typography>
+
           <Typography variant="h6">Total price: </Typography>
 
           <Typography
@@ -79,16 +89,6 @@ const TotalPrice = () => {
             ) : (
               <>{`${summaryData?.totalPrice} $`}</>
             )}
-          </Typography>
-
-          <Typography variant="h6">Selected Subsciption: </Typography>
-
-          <Typography
-            style={{ marginBottom: "1%", color: colors.hover }}
-            variant="h5"
-            align="center"
-          >
-            {`${duration} Months ${storage} GB`}
           </Typography>
         </div>
       </div>

@@ -1,9 +1,7 @@
 import {
-  Button,
   Card,
   CardContent,
   CardHeader,
-  Checkbox,
   FormControl,
   Grid,
   InputAdornment,
@@ -14,8 +12,17 @@ import { AccountCircle } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { apiPOST } from "../../redux/slices/apiSlice";
-import { getUIProperty, setUIData } from "../../redux/slices/uiSlice";
+import {
+  getUIData,
+  getUIProperty,
+  setUIData,
+} from "../../redux/slices/uiSlice";
 import colors from "../../styles/colors";
+import {
+  GreenCheckbox,
+  StyledButton,
+  BodyWithPadding,
+} from "../../styles/genericStyles";
 
 const Step3 = () => {
   const dispatch = useDispatch();
@@ -29,8 +36,7 @@ const Step3 = () => {
   const creditCardData = useSelector((state) =>
     getUIProperty(state, "creditCardData")
   );
-  const summaryData =
-    useSelector((state) => getUIProperty(state, "summaryData")) || {};
+  const summaryData = useSelector((state) => getUIData(state, "summaryData"));
 
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -64,64 +70,76 @@ const Step3 = () => {
   };
 
   return (
-    <Grid container justify="center" align="center">
+    <Grid
+      style={{ margin: "16px 0px 16px 0px", padding: "5%" }}
+      container
+      justify="center"
+      align="center"
+    >
       <Grid item>
         {!completed ? (
-          <Card style={{ maxWidth: "700px" }}>
-            <CardHeader title="Subscription Summary" />
-            <CardContent>
-              <div style={{ marginBottom: "16px" }}>
-                <Typography align="left" variant="h6">
-                  Final price:{" "}
-                  {discount
-                    ? summaryData.totalPrice * 0.9
-                    : summaryData.totalPrice}
-                </Typography>
-                <Typography align="left" variant="h6">
-                  Subscription: {`${duration} Months ${storage} GB`}
-                </Typography>
-              </div>
-              <form style={{ display: "flex", flexDirection: "column" }}>
-                <FormControl>
-                  <TextField
-                    id="input-with-icon-textfield"
-                    variant="outlined"
-                    name="email"
-                    placeholder="email"
-                    label="TextField"
-                    onChange={handleChange}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <AccountCircle />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </FormControl>
-                <FormControl>
-                  <Typography variant="inherit">
-                    Accept with terms and conditions{" "}
-                    <Checkbox
-                      checked={(summaryData || {}).checked}
-                      onChange={handleChange}
-                      name="accept"
-                      color="primary"
-                    />
+          <Card style={{ width: "500px" }}>
+            <BodyWithPadding padding="5%">
+              <CardHeader
+                style={{ color: colors.hover }}
+                title="Subscription Summary"
+              />
+              <CardContent>
+                <div style={{ marginBottom: "16px" }}>
+                  <Typography align="left" variant="h6">
+                    Final price:{" "}
+                    {discount
+                      ? summaryData.totalPrice * 0.9
+                      : summaryData.totalPrice}{" "}
+                    $
                   </Typography>
-                </FormControl>
-                <FormControl>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                    disabled={!isFormValid}
-                  >
-                    Submit
-                  </Button>
-                </FormControl>
-              </form>
-            </CardContent>
+                  <Typography align="left" variant="h6">
+                    Subscription: {`${duration} Months ${storage} GB`}
+                  </Typography>
+                </div>
+                <form style={{ display: "flex", flexDirection: "column" }}>
+                  <FormControl>
+                    <TextField
+                      id="input-with-icon-textfield"
+                      variant="outlined"
+                      name="email"
+                      placeholder="Email"
+                      label="Email"
+                      onChange={handleChange}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <AccountCircle />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <Typography variant="inherit">
+                      Accept terms and conditions
+                      <GreenCheckbox
+                        checked={(summaryData || {}).checked}
+                        onChange={handleChange}
+                        name="accept"
+                        color="primary"
+                      />
+                    </Typography>
+                  </FormControl>
+                </form>
+              </CardContent>
+
+              <FormControl>
+                <StyledButton
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmit}
+                  disabled={!isFormValid}
+                >
+                  Submit
+                </StyledButton>
+              </FormControl>
+            </BodyWithPadding>
           </Card>
         ) : (
           <Typography style={{ color: colors.green }} variant="h5">

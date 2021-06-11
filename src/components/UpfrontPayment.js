@@ -1,7 +1,7 @@
 import React from "react";
-import { Checkbox, Tooltip, Typography } from "@material-ui/core";
+import { Tooltip, Typography } from "@material-ui/core";
 import HelpIcon from "@material-ui/icons/Help";
-import { Space } from "../styles/genericStyles";
+import { Space, GreenCheckbox } from "../styles/genericStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { getUIProperty, setUIProperty } from "../redux/slices/uiSlice";
 
@@ -18,7 +18,7 @@ const UpfrontPayment = () => {
   return (
     <Space>
       <Typography variant="h5">Upfront payment:</Typography>
-      <Checkbox
+      <GreenCheckbox
         checked={checked}
         onChange={handleChange}
         name="checkedB"

@@ -1,7 +1,6 @@
 import React from "react";
 import SubscriptionCardList from "../SubscriptionCardList";
 import UpfrontPayment from "../UpfrontPayment";
-import { Divider } from "@material-ui/core";
 
 const duration = {
   title: "Duration",

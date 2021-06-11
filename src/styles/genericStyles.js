@@ -1,6 +1,27 @@
-import { Card } from "@material-ui/core";
+import React from "react";
+import { Button, Card, Checkbox } from "@material-ui/core";
 import styled from "styled-components";
 import colors from "./colors";
+import { withStyles } from "@material-ui/core/styles";
+
+export const GreenCheckbox = withStyles({
+  root: {
+    color: colors.default,
+    "&$checked": {
+      color: colors.selected,
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
+
+export const StyledButton = styled(Button)`
+  background: ${colors.default};
+  color: white;
+
+  &:hover {
+    background: ${colors.selected};
+  }
+`;
 
 export const Space = styled.div`
   display: flex;

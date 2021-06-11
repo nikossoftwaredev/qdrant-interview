@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
+import { StyledButton } from "../styles/genericStyles";
 import Typography from "@material-ui/core/Typography";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
   },
-  button: {
+  StyledButton: {
     marginRight: theme.spacing(1),
     "&:hover": {
       background: colors.selected,
@@ -98,31 +98,34 @@ const PaymentSteps = () => {
             <Typography className={classes.instructions}>
               All steps completed - you&apos;re finished
             </Typography>
-            <Button onClick={handleReset} className={classes.button}>
+            <StyledButton
+              onClick={handleReset}
+              className={classes.StyledButton}
+            >
               Reset
-            </Button>
+            </StyledButton>
           </div>
         ) : (
           <div>
             {steps[activeStep].component}
             <div>
-              <Button
+              <StyledButton
                 disabled={activeStep === 0}
                 onClick={handleBack}
-                className={classes.button}
+                className={classes.StyledButton}
               >
                 Back
-              </Button>
+              </StyledButton>
 
               {activeStep !== steps.length - 1 && (
-                <Button
+                <StyledButton
                   variant="contained"
                   disabled={!isCreditCardValid && activeStep === 1}
                   onClick={handleNext}
-                  className={classes.button}
+                  className={classes.StyledButton}
                 >
                   Next
-                </Button>
+                </StyledButton>
               )}
             </div>
           </div>
