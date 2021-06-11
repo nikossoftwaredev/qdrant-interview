@@ -4,6 +4,7 @@ import PaymentSteps from "../components/PaymentSteps";
 import TotalPrice from "../components/TotalPrice";
 import { apiGET } from "../redux/slices/apiSlice";
 import { BodyWithPadding } from "../styles/genericStyles";
+import Grid from "@material-ui/core/Grid";
 
 const PaymentPage = () => {
   const dispatch = useDispatch();
@@ -19,8 +20,14 @@ const PaymentPage = () => {
 
   return (
     <BodyWithPadding padding="1% 5% 1% 5%">
-      <TotalPrice />
-      <PaymentSteps />
+      <Grid container align="center" justify="center">
+        <Grid item xs={12} md={8}>
+          <PaymentSteps />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <TotalPrice />
+        </Grid>
+      </Grid>
     </BodyWithPadding>
   );
 };

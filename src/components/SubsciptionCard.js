@@ -18,7 +18,10 @@ const SubscriptionCard = ({ text, value, selectedValue, valueName }) => {
         <BodyWithPadding padding="10% 0% 10% 5%">
           <CardContent>
             <Typography variant="h3" style={{ color: "white" }} component="p">
-              {`${value} ${text}`}
+              {value}
+            </Typography>
+            <Typography variant="h3" style={{ color: "white" }} component="p">
+              {text}
             </Typography>
           </CardContent>
         </BodyWithPadding>

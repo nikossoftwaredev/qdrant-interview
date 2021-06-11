@@ -10,6 +10,7 @@ import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import { useSelector } from "react-redux";
 import { getUIProperty } from "../redux/slices/uiSlice";
+import colors from "../styles/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginRight: theme.spacing(1),
+    "&:hover": {
+      background: colors.selected,
+    },
+    background: colors.default,
   },
   instructions: {
     marginTop: theme.spacing(1),
@@ -112,7 +117,6 @@ const PaymentSteps = () => {
               {activeStep !== steps.length - 1 && (
                 <Button
                   variant="contained"
-                  color="primary"
                   disabled={!isCreditCardValid && activeStep === 1}
                   onClick={handleNext}
                   className={classes.button}

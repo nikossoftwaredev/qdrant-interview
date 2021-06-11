@@ -1,6 +1,7 @@
 import React from "react";
 import SubscriptionCardList from "../SubscriptionCardList";
 import UpfrontPayment from "../UpfrontPayment";
+import { Divider } from "@material-ui/core";
 
 const duration = {
   title: "Duration",
@@ -17,7 +18,7 @@ const gigabyte = {
 
 const Step1 = () => {
   return (
-    <div>
+    <div style={{ marginTop: "16px" }}>
       <SubscriptionCardList cards={duration} valueName="duration" />
       <SubscriptionCardList cards={gigabyte} valueName="storage" />
       <UpfrontPayment />

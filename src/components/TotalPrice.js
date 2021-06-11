@@ -1,8 +1,13 @@
 import { Grid, Typography } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUIProperty, setUIData } from "../redux/slices/uiSlice";
+import {
+  getUIProperty,
+  setUIData,
+  setUIProperty,
+} from "../redux/slices/uiSlice";
 import { getApiResource } from "../redux/slices/apiSlice";
+import colors from "../styles/colors";
 
 const calculateTotalPrice = (duration = 12, storage = 5, prices) => {
   if (prices && prices.subscription_plans) {
@@ -20,16 +25,21 @@ const calculateTotalPrice = (duration = 12, storage = 5, prices) => {
 
 const TotalPrice = () => {
   const dispatch = useDispatch();
-  const duration =
-    useSelector((state) => getUIProperty(state, "duration")) || 12;
-  const storage = useSelector((state) => getUIProperty(state, "storage")) || 5;
+
+  // Redux variables
+  const prices = useSelector((state) => getApiResource(state, "prices"));
+  const storage = useSelector((state) => getUIProperty(state, "storage"));
   const discount = useSelector((state) => getUIProperty(state, "discount"));
+  const duration = useSelector((state) => getUIProperty(state, "duration"));
   const summaryData = useSelector(
     (state) => getUIProperty(state, "summaryData") || {}
   );
 
-  // Prices from api
-  const prices = useSelector((state) => getApiResource(state, "prices"));
+  useEffect(() => {
+    // Set the default Values
+    dispatch(setUIProperty({ name: "duration", value: 12 }));
+    dispatch(setUIProperty({ name: "storage", value: 5 }));
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(
@@ -41,47 +51,47 @@ const TotalPrice = () => {
   }, [duration, storage, prices, dispatch]);
 
   return (
-    <div style={{ width: "100%", position: "sticky" }}>
-      <Grid container justify="center" alignItems="center" direction="column">
-        <Grid container item xs={6}>
-          <Grid item xs={6}>
-            <Typography variant="h5">Total price: </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography
-              style={{ marginBottom: "1%" }}
-              variant="h5"
-              align="center"
-            >
-              {discount ? (
-                <>
-                  <del
-                    style={{ color: "red" }}
-                  >{`${summaryData?.totalPrice} $`}</del>
-                  &nbsp;
-                  {` ${summaryData?.totalPrice * 0.9} $`}
-                </>
-              ) : (
-                <>{`${summaryData?.totalPrice} $`}</>
-              )}
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container item xs={6}>
-          <Grid item xs={6}>
-            <Typography variant="h5">Selected Subsciption: </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography
-              style={{ marginBottom: "1%" }}
-              variant="h5"
-              align="center"
-            >
-              {`${duration} Months ${storage} GB`}
-            </Typography>
-          </Grid>
-        </Grid>
-      </Grid>
+    <div
+      style={{
+        display: "flex",
+        height: "100%",
+        width: "80%",
+        alignItems: "center",
+      }}
+    >
+      <div class="receipt">
+        <div class="receipt-list">
+          <Typography variant="h6">Total price: </Typography>
+
+          <Typography
+            style={{ marginBottom: "1%", color: colors.hover }}
+            variant="h5"
+            align="center"
+          >
+            {discount ? (
+              <>
+                <del
+                  style={{ color: "red" }}
+                >{`${summaryData?.totalPrice} $`}</del>
+                &nbsp;
+                {` ${summaryData?.totalPrice * 0.9} $`}
+              </>
+            ) : (
+              <>{`${summaryData?.totalPrice} $`}</>
+            )}
+          </Typography>
+
+          <Typography variant="h6">Selected Subsciption: </Typography>
+
+          <Typography
+            style={{ marginBottom: "1%", color: colors.hover }}
+            variant="h5"
+            align="center"
+          >
+            {`${duration} Months ${storage} GB`}
+          </Typography>
+        </div>
+      </div>
     </div>
   );
 };
