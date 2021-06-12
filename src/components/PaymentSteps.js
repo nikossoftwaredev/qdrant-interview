@@ -81,7 +81,7 @@ const PaymentSteps = ({ width }) => {
     <div className={classes.root}>
       <Stepper
         activeStep={activeStep}
-        orientation={isWidthUp("xs", width) ? "vertical" : "horizontal"}
+        orientation={isWidthUp("sm", width) ? "horizontal" : "vertical"}
       >
         {steps.map((step, index) => {
           const stepProps = {};
