@@ -28,17 +28,15 @@ const Step3 = () => {
   const dispatch = useDispatch();
 
   const [completed, setCompleted] = useState(false);
-
-  const duration =
-    useSelector((state) => getUIProperty(state, "duration")) || 12;
-  const storage = useSelector((state) => getUIProperty(state, "storage")) || 5;
-  const discount = useSelector((state) => getUIProperty(state, "discount"));
-  const creditCardData = useSelector((state) =>
-    getUIProperty(state, "creditCardData")
-  );
-  const summaryData = useSelector((state) => getUIData(state, "summaryData"));
-
   const [isFormValid, setIsFormValid] = useState(false);
+
+  const duration = useSelector((state) => getUIProperty(state, "duration"));
+  const storage = useSelector((state) => getUIProperty(state, "storage"));
+  const discount = useSelector((state) => getUIProperty(state, "discount"));
+  const summaryData = useSelector((state) => getUIData(state, "summaryData"));
+  const creditCardData = useSelector((state) =>
+    getUIData(state, "creditCardData")
+  );
 
   useEffect(() => {
     setIsFormValid(
@@ -71,14 +69,14 @@ const Step3 = () => {
 
   return (
     <Grid
-      style={{ margin: "16px 0px 16px 0px", padding: "5%" }}
+      style={{ margin: "32px 0px 32px 0px" }}
       container
       justify="center"
       align="center"
     >
       <Grid item>
         {!completed ? (
-          <Card style={{ width: "500px" }}>
+          <Card style={{ width: "500px", maxWidth: "58%" }}>
             <BodyWithPadding padding="5%">
               <CardHeader
                 style={{ color: colors.hover }}

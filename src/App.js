@@ -2,12 +2,12 @@ import React from "react";
 import "./App.scss";
 import PaymentPage from "./pages/PaymentPage";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <PaymentPage />
     </div>
   );
-}
+};
 
 export default App;

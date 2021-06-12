@@ -1,41 +1,11 @@
-import { FormControl, TextField, withStyles } from "@material-ui/core";
+import { FormControl } from "@material-ui/core";
 import React, { useEffect } from "react";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getUIData, setUIData, setUIProperty } from "../redux/slices/uiSlice";
-
-const ValidationTextField = withStyles({
-  root: {
-    "& > *": {
-      margin: "16px",
-    },
-    "& input:valid:focus + fieldset": {
-      borderLeftWidth: 6,
-      padding: "4px !important", // override inline-style
-    },
-  },
-})(TextField);
-
-const formatCard = (card) => {
-  let formatedCard = card
-    .replace(/[a-zA-Z]/g, "")
-    .replace(/ /g, "")
-    .match(/.{1,4}/g);
-
-  return (formatedCard || []).join(" ");
-};
-
-const formatExpiry = (expiry) => {
-  let formatedExpiry = expiry
-    .replace(/[a-zA-Z]/g, "")
-    .split("/")
-    .join("");
-  if (formatedExpiry.length <= 4 && formatedExpiry.length > 0)
-    return formatedExpiry.match(/.{1,2}/g).join("/");
-};
-
-const formatCVC = (CVC) => CVC.replace(/[a-zA-Z]/g, "");
+import { ValidationTextField } from "../styles/genericStyles";
+import { formatCard, formatExpiry, formatCVC } from "../utils/form";
 
 const CreditCard = () => {
   const dispatch = useDispatch();
@@ -138,7 +108,7 @@ const CreditCard = () => {
             name="cvc"
             value={creditCardData.cvc}
             inputProps={{ maxLength: 3 }}
-            label="CVC"
+            label="CCV"
             required
             variant="outlined"
             onChange={handleInputChange}

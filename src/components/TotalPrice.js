@@ -57,6 +57,7 @@ const TotalPrice = () => {
         height: "100%",
         width: "80%",
         alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <div className="receipt">

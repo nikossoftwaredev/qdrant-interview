@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Checkbox } from "@material-ui/core";
+import { Button, Card, Checkbox, TextField } from "@material-ui/core";
 import styled from "styled-components";
 import colors from "./colors";
 import { withStyles } from "@material-ui/core/styles";
@@ -13,6 +13,18 @@ export const GreenCheckbox = withStyles({
   },
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
+
+export const ValidationTextField = withStyles({
+  root: {
+    "& > *": {
+      margin: "16px",
+    },
+    "& input:valid:focus + fieldset": {
+      borderLeftWidth: 6,
+      padding: "4px !important", // override inline-style
+    },
+  },
+})(TextField);
 
 export const StyledButton = styled(Button)`
   background: ${colors.default};

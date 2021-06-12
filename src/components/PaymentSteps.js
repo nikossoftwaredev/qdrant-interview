@@ -11,10 +11,12 @@ import Step3 from "./steps/Step3";
 import { useSelector } from "react-redux";
 import { getUIProperty } from "../redux/slices/uiSlice";
 import colors from "../styles/colors";
+import { isWidthUp, withWidth } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    marginBottom: "16px",
   },
   StyledButton: {
     marginRight: theme.spacing(1),
@@ -44,11 +46,11 @@ const steps = [
   },
 ];
 
-const PaymentSteps = () => {
+const PaymentSteps = ({ width }) => {
+  const classes = useStyles();
   const isCreditCardValid =
     useSelector((state) => getUIProperty(state, "creditCardValid")) || false;
 
-  const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
@@ -77,7 +79,10 @@ const PaymentSteps = () => {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep}>
+      <Stepper
+        activeStep={activeStep}
+        orientation={isWidthUp("xs", width) ? "vertical" : "horizontal"}
+      >
         {steps.map((step, index) => {
           const stepProps = {};
           const labelProps = {};
@@ -135,4 +140,4 @@ const PaymentSteps = () => {
   );
 };
 
-export default PaymentSteps;
+export default withWidth()(PaymentSteps);

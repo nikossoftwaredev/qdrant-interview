@@ -6,8 +6,9 @@ import { BodyWithPadding, StyledCard } from "../styles/genericStyles";
 
 const SubscriptionCard = ({ text, value, selectedValue, valueName }) => {
   const dispatch = useDispatch();
+
   return (
-    <Grid item xs={3}>
+    <Grid item xs={6} md={3}>
       <StyledCard
         elevation={10}
         selected={selectedValue === value}
@@ -15,12 +16,12 @@ const SubscriptionCard = ({ text, value, selectedValue, valueName }) => {
           dispatch(setUIProperty({ name: valueName, value: value }))
         }
       >
-        <BodyWithPadding padding="10% 0% 10% 5%">
+        <BodyWithPadding padding="10% 0% 10% 0%">
           <CardContent>
             <Typography variant="h3" style={{ color: "white" }} component="p">
               {value}
             </Typography>
-            <Typography variant="h3" style={{ color: "white" }} component="p">
+            <Typography variant="h5" style={{ color: "white" }} component="p">
               {text}
             </Typography>
           </CardContent>
